@@ -33,23 +33,41 @@ h1{
 }
 .uno{
     border: 1px solid var(--color-secondary);
-    background-color:var(--color-secondary)
+    background-color:var(--color-secondary);
+    margin: 0 auto;
+    padding: 30px;
+    display: inline-block;
+    width: 300px;
+    border-radius: 10px;
+    
 }
 .dos{
     border: 1px solid var(--color-secondary);
-    transform: translateY(-10px);
-    background-color:var(--color-secondary)
+    transform: translateY(10px);
+    display: inline-block;
+    background-color:var(--color-secondary);
+    margin: 0 auto;
+    padding: 30px;
+    width: 300px;
+    border-radius: 10px;
 }   
 .tres{
     border: 1px solid var(--color-secondary);
-
-    background-color:var(--color-secondary)
+    background-color:var(--color-secondary);
+    display: inline-block;
+    transform: translateY(20px);
+    margin: 0 auto;
+    padding: 30px;
+    width: 300px;
+    border-radius: 10px;
 }
 main{
     margin: 30px;
     text-align: center;
     color: var(--color-tertiary);
     padding: 10px;
+
+    
    
 }
 
