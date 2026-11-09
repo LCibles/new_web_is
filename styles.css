@@ -2,6 +2,7 @@
     --color-primary:#ffe0ac;
     --color-secondary:#ffffd1;
     --color-tertiary:#383d3d;
+    --color-quaternary:#dd1111;
 
 }
 
@@ -14,19 +15,25 @@ body{
 h1{
     color: var(--color-primary);
     width: auto;
-    font-size: 80%
+    font-size: 80%;
+   
     
     
 }
 
-.cuadrito{
+section{
     
+    transform: translateY(150px);
+}
+
+.cuadrito{
+      
     width: 300px;
     
 }
 .cuadrogrande{
     
-    border: 1px solid var(--color-secondary);
+    
     padding: 20px;
     margin: -10px; 
     background-color:var(--color-secondary)
@@ -67,8 +74,34 @@ main{
     color: var(--color-tertiary);
     padding: 10px;
 
-    
-   
 }
 
+.trans{
+    transform: translateY(60px);
+    margin: 0 auto;
+}
+
+
+/*animacion de letras*/
+
+.sentence {
+  
+    text-align: center;
+    font-size: 27px;
+    color: var(--color-tertiary);
+    transform: translateY(50px);
+    
+    /*fuciones de animacion*/    
+        width: 0;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: escribir 2.5s steps(16, end) forwards;  
+}
+
+/* Animaciones */
+    @keyframes escribir {
+        from { width: 0; }
+        to { width: 16ch; }
+    }
 
