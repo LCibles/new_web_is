@@ -26,9 +26,6 @@ h1 {
     /* Tipografía y color */
     font-size: 80%;
     color: var(--color-primary);
-
-    /* Dimensiones */
-    width: auto;
 }
 
 /* ============================================================
@@ -46,11 +43,6 @@ h1 {
     background-color:var(--color-secondary)
 }
 
-/* Fragmento destacado del título */
-.cuadrito {
-    /* Dimensiones */
-    width: 300px;
-}
 
 /* ============================================================
    4. CONTENIDO PRINCIPAL (MAIN)
@@ -70,11 +62,6 @@ main {
     color: var(--color-tertiary);
 }
 
-/* Sección de contenido */
-section {
-    /* Desplazamiento visual */
-    transform: translateY(150px);
-}
 
 /* ============================================================
    5. TEXTO Y OPCIONES
@@ -84,20 +71,17 @@ section {
 /* Texto de bienvenida con animación */
 .sentence {
     /* Distribución y desbordamiento */
-    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
+    padding: 20px;
+    
 
     /* Tipografía y color */
-    text-align: center;
     font-size: 27px;
     color: var(--color-tertiary);
 
     /* Dimensiones */
     width: 0;
-
-    /* Desplazamiento visual */
-    transform: translateY(50px);
 
     /* Animación */
     animation: escribir 2.5s steps(16, end) forwards;
@@ -105,78 +89,34 @@ section {
 
 /* Contenedor de las opciones */
 .trans {
-    /* Espaciado */
-    margin: 0 auto;
-
-    /* Desplazamiento visual */
-    transform: translateY(60px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5px;   
 }
 
 /* Primera opción: Caffes */
-.uno {
-    /* Distribución */
-    display: inline-block;
-
+.uno, .dos, .tres {
+  
     /* Dimensiones */
-    width: 300px;
+    width: 100%;
+    max-width: 362px;
+    box-sizing: border-box;
 
     /* Espaciados */
-    margin: 0 auto;
     padding: 30px;
 
     /* Bordes y formas */
-    border: 1px solid var(--color-secondary);
-    border-radius: 10px;
-
-    /* Fondo */
-    background-color:var(--color-secondary);
-}
-
-/* Segunda opción: Bebidas */
-.dos {
-    /* Distribución */
-    display: inline-block;
-
-    /* Dimensiones */
-    width: 300px;
-
-    /* Espaciados */
-    margin: 0 auto;
-    padding: 30px;
-
-    /* Bordes y formas */
-    border: 1px solid var(--color-secondary);
     border-radius: 10px;
 
     /* Fondo */
     background-color:var(--color-secondary);
 
-    /* Desplazamiento visual */
-    transform: translateY(10px);
+    
 }
 
-/* Tercera opción: Acompañamientos */
-.tres {
-    /* Distribución */
-    display: inline-block;
-
-    /* Dimensiones */
-    width: 300px;
-
-    /* Espaciados */
-    margin: 0 auto;
-    padding: 30px;
-
-    /* Bordes y formas */
-    border: 1px solid var(--color-secondary);
-    border-radius: 10px;
-
-    /* Fondo */
-    background-color:var(--color-secondary);
-
-    /* Desplazamiento visual */
-    transform: translateY(20px);
-}
 
 /* ============================================================
    6. ANIMACIONES (KEYFRAMES)
@@ -185,4 +125,14 @@ section {
 @keyframes escribir {
     from { width: 0; }
     to { width: 16ch; }
+}
+
+/* Adaptación del texto animado a pantallas pequeñas */
+@media (max-width: 480px) {
+    .sentence {
+        font-size: clamp(12px, 5vw, 27px);
+    }
+    .uno, .dos, .tres{
+        font-size: clamp(12px, 5vw, 27px);
+    }
 }
