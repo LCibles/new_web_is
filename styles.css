@@ -1,9 +1,8 @@
 /* ============================================================
    1. VARIABLES GLOBALES
-   Paleta de colores compartida por la página.
+   Colores reutilizados mediante var(--nombre).
    ============================================================ */
 :root {
-    /* Colores */
     --color-primary:#ffe0ac;
     --color-secondary:#ffffd1;
     --color-tertiary:#144141;
@@ -12,146 +11,136 @@
 
 /* ============================================================
    2. ESTILOS GENERALES
-   Fondo de la página y apariencia de los títulos.
+   Se aplican a la página o a etiquetas HTML completas.
    ============================================================ */
 
-/* Fondo general */
+/* Fondo y margen exterior de toda la página. */
 body {
-    /* Apariencia */
     background-color: var(--color-primary);
     margin: 0;
 }
 
-
-/* ============================================================
-   3. ENCABEZADO (HEADER)
-   Contenedor del encabezado y fragmento del título.
-   ============================================================ */
-
-/* Títulos */
+/* Estilo compartido por todos los elementos h1. */
 h1 {
-    /* Tipografía y color */
     font-size: 80%;
     color: var(--color-primary);
 }
 
-
-/* Contenedor principal del encabezado */
+/* ============================================================
+   3. ENCABEZADO
+   .cuadrogrande es el bloque visual dentro de <header>.
+   ============================================================ */
 .cuadrogrande {
-    /* Espaciados */
+    /* Espacio interior y exterior del encabezado. */
     padding: 20px;
-    
     margin: 0px;
 
-    /* Fondo */
+    /* Color de fondo del encabezado. */
     background-color:var(--color-secondary)
 }
 
-
 /* ============================================================
-   4. CONTENIDO PRINCIPAL (MAIN)
-   Área central y sección del contenido.
+   4. RECUADRO CON SOMBRA
+   .sombreado está dentro de .trans, no es el elemento <main>.
+   Sus reglas afectan el recuadro y la distribución de sus hijos.
    ============================================================ */
-
-/* Contenedor principal */
 .sombreado {
-    /* Alineación */
+    /* Alineación del texto. */
     text-align: center;
 
-    /* Espaciados */
+    /* Separación exterior. */
     margin: 30px;
-    
-    /* movimiento*/
+
+    /* Desplazamiento visual vertical:
+       30% se calcula respecto a la altura de .sombreado,
+       NO respecto a la altura de la pantalla. */
     transform: translateY(30%);
-    
-    /* Color del texto */
+
+    /* Color de texto heredable por los elementos interiores. */
     color: var(--color-tertiary);
-    
-    /* Bordes */
-    
+
+    /* Forma del recuadro y sombra exterior. */
     border-radius: 10px;
-        /*sombra*/
     box-shadow:5px 5px 8px var(--color-tertiary);
-     
+
+    /* Flexbox organiza los hijos de .sombreado en columna.
+       Si el ancho intrínseco de un hijo cambia por la animación,
+       el navegador puede recalcular el tamaño del recuadro. */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
 
+    /* Separación interior del recuadro. */
     padding: 20px;
 }
 
-
 /* ============================================================
-   5. TEXTO Y OPCIONES
-   Texto animado, contenedor de opciones y sus elementos.
+   5. TEXTO ANIMADO Y CONTENEDOR EXTERIOR
    ============================================================ */
 
-/* Texto de bienvenida con animación */
+/* .sentence: el ancho cambia de 0 a 16ch mediante @keyframes. */
 .sentence {
-    /* Distribución y desbordamiento */
+    /* Oculta el texto que aún no cabe durante la escritura. */
     overflow: hidden;
     white-space: nowrap;
     padding: 20px;
-    
 
-    /* Tipografía y color */
+    /* Apariencia del texto. */
     font-size: 27px;
     color: var(--color-tertiary);
 
-    /* Dimensiones */
+    /* Ancho inicial; la animación lo modifica. */
     width: 0;
 
-    /* Animación */
+    /* Efecto de escritura, definido en la sección 7. */
     animation: escribir 2.5s steps(16, end) forwards;
 }
 
-/* Contenedor de las opciones */
+/* .trans: organiza y centra a su hijo .sombreado. */
 .trans {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 2.5px;   
-    
-
-   
-    
+    gap: 2.5px;
 }
 
-/* Opciones de pedidos*/
+/* ============================================================
+   6. CUADROS DE OPCIONES
+   .uno, .dos y .tres comparten exactamente las mismas reglas.
+   ============================================================ */
 .uno, .dos, .tres {
-  
-    /* Dimensiones */
+    /* El 100% toma como referencia el ancho disponible del padre;
+       max-width limita el ancho de cada opción. */
     width: 100%;
     max-width: 362px;
     box-sizing: border-box;
 
-    /* Espaciados */
+    /* Espacio interior. */
     padding: 30px ;
 
-    /* Bordes y formas */
+    /* Esquinas redondeadas y fondo. */
     border-radius: 10px;
-
-    /* Fondo */
     background-color:var(--color-secondary);
-
-    
 }
 
-
 /* ============================================================
-   6. ANIMACIONES (KEYFRAMES)
-   Efecto de escritura aplicado a .sentence.
+   7. ANIMACIÓN DE ESCRITURA
+   Modifica el ancho de .sentence, no anima directamente los cuadros.
    ============================================================ */
 @keyframes escribir {
     from { width: 0; }
     to { width: 16ch; }
 }
 
-/* Adaptación del texto animado a pantallas pequeñas */
+/* ============================================================
+   8. AJUSTES PARA PANTALLAS PEQUEÑAS
+   Esta regla solo cambia los tamaños de letra a 480px o menos.
+   No establece anchos distintos para .sombreado o .trans.
+   ============================================================ */
 @media (max-width: 480px) {
     .sentence {
         font-size: clamp(12px, 5vw, 27px);
