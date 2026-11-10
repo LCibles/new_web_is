@@ -98,6 +98,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 2.5px;   
+    padding: 20px;
 }
 
 /* Opciones de pedidos*/
