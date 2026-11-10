@@ -18,6 +18,12 @@
 body {
     background-color: var(--color-primary);
     margin: 0;
+
+    /* El cuerpo ocupa como mínimo toda la altura visible.
+       Flexbox reparte verticalmente header y main. */
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilo compartido por todos los elementos h1. */
@@ -40,39 +46,54 @@ h1 {
 }
 
 /* ============================================================
-   4. RECUADRO CON SOMBRA
-   .sombreado está dentro de .trans, no es el elemento <main>.
-   Sus reglas afectan el recuadro y la distribución de sus hijos.
+   4. CONTENIDO PRINCIPAL Y RECUADRO CON SOMBRA
+   Dos niveles de distribución:
+   body reparte header/main; main centra la sección;
+   .sombreado organiza la frase y los cuadros.
    ============================================================ */
+
+/* Ocupa el espacio bajo el encabezado y centra su contenido.
+   No modifica la animación ni el tamaño propio de los cuadros. */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 24px 0;
+    box-sizing: border-box;
+}
+
+/* La sección debe ocupar todo el ancho para que .trans
+   pueda centrar un recuadro adaptable. */
+main > section {
+    width: 100%;
+    min-width: 0;
+}
+
+/* .sombreado tiene un ancho estable: en escritorio llega
+   como máximo a 420px; en móvil deja 16px por cada lado.
+   La animación de .sentence ya no cambia el ancho del recuadro. */
 .sombreado {
-    /* Alineación del texto. */
     text-align: center;
+    width: min(420px, calc(100% - 32px));
+    box-sizing: border-box;
+    margin: 0 auto;
 
-    /* Separación exterior. */
-    margin: 30px;
-
-    /* Desplazamiento visual vertical:
-       30% se calcula respecto a la altura de .sombreado,
-       NO respecto a la altura de la pantalla. */
-    transform: translateY(30%);
-
-    /* Color de texto heredable por los elementos interiores. */
+    /* Se elimina translateY(30%): se centrará desde main,
+       de forma adaptable a distintas alturas de pantalla. */
     color: var(--color-tertiary);
-
-    /* Forma del recuadro y sombra exterior. */
     border-radius: 10px;
-    box-shadow:5px 5px 8px var(--color-tertiary);
+    box-shadow: 5px 5px 8px var(--color-tertiary);
 
-    /* Flexbox organiza los hijos de .sombreado en columna.
-       Si el ancho intrínseco de un hijo cambia por la animación,
-       el navegador puede recalcular el tamaño del recuadro. */
+    /* Los cuatro hijos se apilan y el espacio entre ellos
+       lo controla gap, no los saltos de línea del HTML. */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-
-    /* Separación interior del recuadro. */
+    gap: 12px;
     padding: 20px;
 }
 
@@ -80,26 +101,27 @@ h1 {
    5. TEXTO ANIMADO Y CONTENEDOR EXTERIOR
    ============================================================ */
 
-/* .sentence: el ancho cambia de 0 a 16ch mediante @keyframes. */
+/* .sentence: solo se anima el ancho del título, no el recuadro.
+   Su padre ya tiene ancho fijo/adaptable, así los cuadros no saltan. */
 .sentence {
-    /* Oculta el texto que aún no cabe durante la escritura. */
     overflow: hidden;
     white-space: nowrap;
-    padding: 20px;
 
-    /* Apariencia del texto. */
+    /* Mantiene el aspecto del título y anula el margen por defecto
+       del elemento h2 para que gap controle los espacios. */
+    margin: 0;
+    padding: 20px;
     font-size: 27px;
     color: var(--color-tertiary);
 
-    /* Ancho inicial; la animación lo modifica. */
+    /* Conservamos el efecto de escritura original. */
     width: 0;
-
-    /* Efecto de escritura, definido en la sección 7. */
     animation: escribir 2.5s steps(16, end) forwards;
 }
 
-/* .trans: organiza y centra a su hijo .sombreado. */
+/* .trans: abarca la sección y centra a su hijo .sombreado. */
 .trans {
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -138,8 +160,8 @@ h1 {
 
 /* ============================================================
    8. AJUSTES PARA PANTALLAS PEQUEÑAS
-   Esta regla solo cambia los tamaños de letra a 480px o menos.
-   No establece anchos distintos para .sombreado o .trans.
+   El tamaño de la tarjeta ya se adapta con min() en .sombreado;
+   aquí se adapta el tamaño de letra sin afectar escritorio.
    ============================================================ */
 @media (max-width: 480px) {
     .sentence {
