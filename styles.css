@@ -21,6 +21,12 @@ body {
     background-color: var(--color-primary);
 }
 
+
+/* ============================================================
+   3. ENCABEZADO (HEADER)
+   Contenedor del encabezado y fragmento del título.
+   ============================================================ */
+
 /* Títulos */
 h1 {
     /* Tipografía y color */
@@ -28,10 +34,6 @@ h1 {
     color: var(--color-primary);
 }
 
-/* ============================================================
-   3. ENCABEZADO (HEADER)
-   Contenedor del encabezado y fragmento del título.
-   ============================================================ */
 
 /* Contenedor principal del encabezado */
 .cuadrogrande {
@@ -56,8 +58,7 @@ main {
 
     /* Espaciados */
     margin: 30px;
-    padding: 10px;
-
+    
     /* Color del texto */
     color: var(--color-tertiary);
 }
@@ -91,13 +92,13 @@ main {
 .trans {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 2.5px;   
 }
 
-/* Primera opción: Caffes */
+/* Opciones de pedidos*/
 .uno, .dos, .tres {
   
     /* Dimensiones */
