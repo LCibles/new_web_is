@@ -6,7 +6,7 @@
     /* Colores */
     --color-primary:#ffe0ac;
     --color-secondary:#ffffd1;
-    --color-tertiary:#383d3d;
+    --color-tertiary:#144141;
     --color-quaternary:#dd1111;
 }
 
@@ -54,15 +54,32 @@ h1 {
    ============================================================ */
 
 /* Contenedor principal */
-main {
+.sombreado {
     /* Alineación */
     text-align: center;
 
     /* Espaciados */
     margin: 30px;
     
+    /* movimiento*/
+    transform: translateY(30%);
+    
     /* Color del texto */
     color: var(--color-tertiary);
+    
+    /* Bordes */
+    
+    border-radius: 10px;
+        /*sombra*/
+    box-shadow:5px 5px 8px var(--color-tertiary);
+     
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
 }
 
 
@@ -98,7 +115,10 @@ main {
     align-items: center;
     justify-content: center;
     gap: 2.5px;   
-    padding: 20px;
+    
+
+   
+    
 }
 
 /* Opciones de pedidos*/
@@ -110,7 +130,7 @@ main {
     box-sizing: border-box;
 
     /* Espaciados */
-    padding: 30px;
+    padding: 30px ;
 
     /* Bordes y formas */
     border-radius: 10px;
