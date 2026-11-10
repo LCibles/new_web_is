@@ -19,7 +19,7 @@
 body {
     /* Apariencia */
     background-color: var(--color-primary);
-   overflow-x: hidden;
+    margin: 0;
 }
 
 
@@ -40,6 +40,7 @@ h1 {
 .cuadrogrande {
     /* Espaciados */
     padding: 20px;
+    
     margin: 0px;
 
     /* Fondo */
