@@ -1,107 +1,188 @@
-:root{
+/* ============================================================
+   1. VARIABLES GLOBALES
+   Paleta de colores compartida por la página.
+   ============================================================ */
+:root {
+    /* Colores */
     --color-primary:#ffe0ac;
     --color-secondary:#ffffd1;
     --color-tertiary:#383d3d;
     --color-quaternary:#dd1111;
-
 }
 
-body{
+/* ============================================================
+   2. ESTILOS GENERALES
+   Fondo de la página y apariencia de los títulos.
+   ============================================================ */
+
+/* Fondo general */
+body {
+    /* Apariencia */
     background-color: var(--color-primary);
-    
 }
 
-
-h1{
-    color: var(--color-primary);
-    width: auto;
+/* Títulos */
+h1 {
+    /* Tipografía y color */
     font-size: 80%;
-   
-    
-    
+    color: var(--color-primary);
+
+    /* Dimensiones */
+    width: auto;
 }
 
-section{
-    
+/* ============================================================
+   3. ENCABEZADO (HEADER)
+   Contenedor del encabezado y fragmento del título.
+   ============================================================ */
+
+/* Contenedor principal del encabezado */
+.cuadrogrande {
+    /* Espaciados */
+    padding: 20px;
+    margin: -10px;
+
+    /* Fondo */
+    background-color:var(--color-secondary)
+}
+
+/* Fragmento destacado del título */
+.cuadrito {
+    /* Dimensiones */
+    width: 300px;
+}
+
+/* ============================================================
+   4. CONTENIDO PRINCIPAL (MAIN)
+   Área central y sección del contenido.
+   ============================================================ */
+
+/* Contenedor principal */
+main {
+    /* Alineación */
+    text-align: center;
+
+    /* Espaciados */
+    margin: 30px;
+    padding: 10px;
+
+    /* Color del texto */
+    color: var(--color-tertiary);
+}
+
+/* Sección de contenido */
+section {
+    /* Desplazamiento visual */
     transform: translateY(150px);
 }
 
-.cuadrito{
-      
-    width: 300px;
-    
-}
-.cuadrogrande{
-    
-    
-    padding: 20px;
-    margin: -10px; 
-    background-color:var(--color-secondary)
-}
-.uno{
-    border: 1px solid var(--color-secondary);
-    background-color:var(--color-secondary);
-    margin: 0 auto;
-    padding: 30px;
-    display: inline-block;
-    width: 300px;
-    border-radius: 10px;
-    
-}
-.dos{
-    border: 1px solid var(--color-secondary);
-    transform: translateY(10px);
-    display: inline-block;
-    background-color:var(--color-secondary);
-    margin: 0 auto;
-    padding: 30px;
-    width: 300px;
-    border-radius: 10px;
-}   
-.tres{
-    border: 1px solid var(--color-secondary);
-    background-color:var(--color-secondary);
-    display: inline-block;
-    transform: translateY(20px);
-    margin: 0 auto;
-    padding: 30px;
-    width: 300px;
-    border-radius: 10px;
-}
-main{
-    margin: 30px;
-    text-align: center;
-    color: var(--color-tertiary);
-    padding: 10px;
+/* ============================================================
+   5. TEXTO Y OPCIONES
+   Texto animado, contenedor de opciones y sus elementos.
+   ============================================================ */
 
-}
-
-.trans{
-    transform: translateY(60px);
-    margin: 0 auto;
-}
-
-
-/*animacion de letras*/
-
+/* Texto de bienvenida con animación */
 .sentence {
-  
+    /* Distribución y desbordamiento */
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+
+    /* Tipografía y color */
     text-align: center;
     font-size: 27px;
     color: var(--color-tertiary);
+
+    /* Dimensiones */
+    width: 0;
+
+    /* Desplazamiento visual */
     transform: translateY(50px);
-    
-    /*fuciones de animacion*/    
-        width: 0;
-        display: inline-block;
-        overflow: hidden;
-        white-space: nowrap;
-        animation: escribir 2.5s steps(16, end) forwards;  
+
+    /* Animación */
+    animation: escribir 2.5s steps(16, end) forwards;
 }
 
-/* Animaciones */
-    @keyframes escribir {
-        from { width: 0; }
-        to { width: 16ch; }
-    }
+/* Contenedor de las opciones */
+.trans {
+    /* Espaciado */
+    margin: 0 auto;
 
+    /* Desplazamiento visual */
+    transform: translateY(60px);
+}
+
+/* Primera opción: Caffes */
+.uno {
+    /* Distribución */
+    display: inline-block;
+
+    /* Dimensiones */
+    width: 300px;
+
+    /* Espaciados */
+    margin: 0 auto;
+    padding: 30px;
+
+    /* Bordes y formas */
+    border: 1px solid var(--color-secondary);
+    border-radius: 10px;
+
+    /* Fondo */
+    background-color:var(--color-secondary);
+}
+
+/* Segunda opción: Bebidas */
+.dos {
+    /* Distribución */
+    display: inline-block;
+
+    /* Dimensiones */
+    width: 300px;
+
+    /* Espaciados */
+    margin: 0 auto;
+    padding: 30px;
+
+    /* Bordes y formas */
+    border: 1px solid var(--color-secondary);
+    border-radius: 10px;
+
+    /* Fondo */
+    background-color:var(--color-secondary);
+
+    /* Desplazamiento visual */
+    transform: translateY(10px);
+}
+
+/* Tercera opción: Acompañamientos */
+.tres {
+    /* Distribución */
+    display: inline-block;
+
+    /* Dimensiones */
+    width: 300px;
+
+    /* Espaciados */
+    margin: 0 auto;
+    padding: 30px;
+
+    /* Bordes y formas */
+    border: 1px solid var(--color-secondary);
+    border-radius: 10px;
+
+    /* Fondo */
+    background-color:var(--color-secondary);
+
+    /* Desplazamiento visual */
+    transform: translateY(20px);
+}
+
+/* ============================================================
+   6. ANIMACIONES (KEYFRAMES)
+   Efecto de escritura aplicado a .sentence.
+   ============================================================ */
+@keyframes escribir {
+    from { width: 0; }
+    to { width: 16ch; }
+}
