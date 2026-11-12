@@ -28,15 +28,40 @@
             </div>
         </section>
 
-        <!-- Pantalla 2: permanece oculta hasta pulsar Cafés. -->
+        <!-- Pantalla 2: el contenedor se desplaza sin cambiar el diseño ni el tamaño de .cuadro. -->
         <section class="menu_coffe" aria-label="Catálogo de cafés" hidden>
-            <div class="cuadro">
-                <img src="cafe_web.png" alt="Taza de café" class="imagen">
-                <div class="letras">
-                    <p class="perte">Café con leche</p>
-                    <h2 class="tipo">Capuchino</h2>
-                    <p>Espresso y leche vaporizada, con una suave capa de espuma.</p>
+            <div class="carrusel-cafes" tabindex="0" aria-label="Productos de café; desliza horizontalmente o utiliza las flechas">
+                <div class="pista-cafes">
+                    <article class="cuadro" aria-label="Producto 1 de 3: Capuchino">
+                        <img src="cafe_web.png" alt="Taza de café" class="imagen" draggable="false">
+                        <div class="letras">
+                            <p class="perte">Café con leche</p>
+                            <h2 class="tipo">Capuchino</h2>
+                            <p>Espresso y leche vaporizada, con una suave capa de espuma.</p>
+                        </div>
+                    </article>
+                    <article class="cuadro" aria-label="Producto 2 de 3: Espresso">
+                        <img src="cafe_web.png" alt="Imagen ilustrativa de café" class="imagen" draggable="false">
+                        <div class="letras">
+                            <p class="perte">Café solo</p>
+                            <h2 class="tipo">Espresso</h2>
+                            <p>Café concentrado de sabor intenso y aroma profundo.</p>
+                        </div>
+                    </article>
+                    <article class="cuadro" aria-label="Producto 3 de 3: Latte">
+                        <img src="cafe_web.png" alt="Imagen ilustrativa de café" class="imagen" draggable="false">
+                        <div class="letras">
+                            <p class="perte">Café con leche</p>
+                            <h2 class="tipo">Latte</h2>
+                            <p>Espresso con leche vaporizada y textura cremosa.</p>
+                        </div>
+                    </article>
                 </div>
+            </div>
+            <div class="controles-cafes" aria-label="Controles del carrusel">
+                <button class="cafe-anterior" type="button" aria-label="Producto anterior" disabled>←</button>
+                <output class="cafe-indicador" aria-live="polite">01 / 03</output>
+                <button class="cafe-siguiente" type="button" aria-label="Producto siguiente">→</button>
             </div>
             <button class="volver" type="button">Volver al menú</button>
         </section>
