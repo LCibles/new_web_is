@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
     <title>pag one</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
 
     <!-- 3. Contenido principal: estructura de la sección central -->
     <main>
-        <section>
+        <section class = "ocul" >
             <!-- 3.1. .trans: contenedor exterior que alinea el recuadro -->
             <div class="trans">
                 <!-- 3.2. .sombreado: borde redondeado, sombra y disposición vertical -->
@@ -28,11 +29,28 @@
 
                     <!-- 3.4. Opciones: Flexbox ya las dispone en columna;
                          no hacen falta saltos de línea <br>. -->
-                    <span class="uno">Caffes</span>
-                    <span class="dos">Bebidas</span>
-                    <span class="tres">Acompañamientos</span>
+                    <button class="uno">Caffes</button>
+                    <button class="dos">Bebidas</button>
+                    <button class="tres">Acompañamientos</button>
                 </div>
             </div>
+        </section>
+
+
+        <section class="menu_coffe" hidden>
+            <div  class="cuadro" hidden>  
+                <img src="cafe_web.png" alt="taza_coffe" class="imagen">
+                
+                <header class="letras">
+
+                    <p class="perte">cafe con leche</p>
+                    <p class = "tipo">capuchino</p>
+                    <p>Espresso y leche vaporizada,
+                    con una suave capa de espuma.</p>
+                    
+                </header>
+            </div>
+
         </section>
     </main>
 </body>
