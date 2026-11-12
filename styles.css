@@ -198,3 +198,67 @@ button:focus-visible {
         font-size: clamp(12px, 5vw, 27px);
     }
 }
+
+/* 9. Carrusel horizontal: .cuadro conserva sus propias medidas y estilos.
+   El contenedor exterior es quien se desplaza. */
+.carrusel-cafes {
+    width: 100%;
+    max-width: 300px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+}
+
+.carrusel-cafes::-webkit-scrollbar {
+    display: none;
+}
+
+.carrusel-cafes.arrastrando {
+    cursor: grabbing;
+    user-select: none;
+}
+
+.pista-cafes {
+    display: flex;
+    align-items: flex-start;
+}
+
+.pista-cafes > .cuadro {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* Controles fuera de las tarjetas: no modifican ancho ni alto del recuadro. */
+.controles-cafes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--color-cafe-texto);
+}
+
+.cafe-anterior, .cafe-siguiente {
+    cursor: pointer;
+    border: 1px solid var(--color-cafe-texto);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: var(--color-cafe-texto);
+    background: transparent;
+    font-size: 21px;
+}
+
+.cafe-anterior:disabled, .cafe-siguiente:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.cafe-indicador {
+    min-width: 58px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
