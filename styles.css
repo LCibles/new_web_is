@@ -199,40 +199,51 @@ button:focus-visible {
     }
 }
 
-/* 9. Carrusel horizontal: .cuadro conserva sus propias medidas y estilos.
-   El contenedor exterior es quien se desplaza. */
+/* 9. Carrusel circular: contenedor más ancho que la tarjeta central.
+   Las tarjetas vecinas asoman a ambos lados, como fotogramas. */
 .carrusel-cafes {
-    width: 100%;
-    max-width: 300px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    width: min(100%, 560px);
+    overflow: hidden;
+    position: relative;
     cursor: grab;
-}
-
-.carrusel-cafes::-webkit-scrollbar {
-    display: none;
-}
-
-.carrusel-cafes.arrastrando {
-    cursor: grabbing;
+    touch-action: pan-y; /* El deslizamiento horizontal no bloquea la página vertical. */
     user-select: none;
+    -webkit-user-select: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
 }
+.carrusel-cafes.arrastrando { cursor: grabbing; }
 
 .pista-cafes {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    gap: 16px;
+    width: max-content;
+    transition: transform 460ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
 }
 
+/* .cuadro conserva su máximo original de 300px y sus estilos interiores.
+   En móviles muy estrechos cede ancho para dejar visibles los vecinos. */
 .pista-cafes > .cuadro {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    flex: 0 0 min(300px, calc(100vw - 80px));
+    width: min(300px, calc(100vw - 80px));
+    transform: scale(0.93);
+    opacity: 0.48;
+    filter: brightness(0.78);
+    transition: transform 460ms ease, opacity 460ms ease, filter 460ms ease;
+}
+.pista-cafes > .cuadro.es-activo {
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
 }
 
-/* Controles fuera de las tarjetas: no modifican ancho ni alto del recuadro. */
+/* El salto invisible desde el clon final al primer original es instantáneo. */
+.pista-cafes.sin-transicion,
+.pista-cafes.sin-transicion > .cuadro { transition: none !important; }
+
+/* Flechas e indicador fuera de las tarjetas: no alteran su formato. */
 .controles-cafes {
     display: flex;
     align-items: center;
@@ -240,7 +251,6 @@ button:focus-visible {
     gap: 18px;
     color: var(--color-cafe-texto);
 }
-
 .cafe-anterior, .cafe-siguiente {
     cursor: pointer;
     border: 1px solid var(--color-cafe-texto);
@@ -251,14 +261,28 @@ button:focus-visible {
     background: transparent;
     font-size: 21px;
 }
-
-.cafe-anterior:disabled, .cafe-siguiente:disabled {
-    opacity: .35;
-    cursor: default;
+.cafe-anterior:hover, .cafe-siguiente:hover {
+    background-color: rgba(243, 223, 196, 0.12);
 }
-
 .cafe-indicador {
     min-width: 58px;
     text-align: center;
     font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+    .pista-cafes, .pista-cafes > .cuadro { transition: none; }
+}
+
+/* En celular dejamos sitio a las vistas previas laterales sin ampliar la página. */
+@media (max-width: 480px) {
+    .menu_coffe { padding-inline: 0; }
+    .pista-cafes { gap: 10px; }
+    .pista-cafes > .cuadro {
+        flex-basis: min(300px, calc(100vw - 90px));
+        width: min(300px, calc(100vw - 90px));
+    }
+    .carrusel-cafes {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
 }
