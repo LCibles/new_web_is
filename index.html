@@ -1,56 +1,45 @@
 <!DOCTYPE html>
-<html lang="es" >
+<html lang="es">
 <head>
-    <!-- 1. Configuración general del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
-    <title>pag one</title>
+    <title>New Web | Menú</title>
 </head>
-<body>
-    <!-- 2. Encabezado: título superior de la página -->
-    <header>
+<body data-vista="inicio">
+    <!-- Encabezado de la pantalla inicial; se oculta al abrir el catálogo. -->
+    <header class="cabecera-principal">
         <div class="cuadrogrande">
-            <h1>Welcome Miguel Sanchez </h1>
+            <h1>Welcome Miguel Sanchez</h1>
         </div>
     </header>
 
-    <!-- 3. Contenido principal: estructura de la sección central -->
     <main>
-        <section class = "ocul" >
-            <!-- 3.1. .trans: contenedor exterior que alinea el recuadro -->
+        <!-- Pantalla 1: menú de categorías. -->
+        <section class="ocul" aria-label="Menú principal">
             <div class="trans">
-                <!-- 3.2. .sombreado: borde redondeado, sombra y disposición vertical -->
                 <div class="sombreado">
-                    <!-- 3.3. .sentence: texto con animación de escritura.
-                         Se usa h2 en vez de un div dentro de h1 para un HTML válido. -->
-                    <h2 class="sentence">Hola, que deceas</h2>
-
-                    <!-- 3.4. Opciones: Flexbox ya las dispone en columna;
-                         no hacen falta saltos de línea <br>. -->
-                    <button class="uno">Caffes</button>
-                    <button class="dos">Bebidas</button>
-                    <button class="tres">Acompañamientos</button>
+                    <h2 class="sentence">Hola, ¿qué deseas?</h2>
+                    <button class="uno" type="button">Cafés</button>
+                    <button class="dos" type="button">Bebidas</button>
+                    <button class="tres" type="button">Acompañamientos</button>
                 </div>
             </div>
         </section>
 
-
-        <section class="menu_coffe" hidden>
-            <div  class="cuadro" hidden>  
-                <img src="cafe_web.png" alt="taza_coffe" class="imagen">
-                
-                <header class="letras">
-
-                    <p class="perte">cafe con leche</p>
-                    <p class = "tipo">capuchino</p>
-                    <p>Espresso y leche vaporizada,
-                    con una suave capa de espuma.</p>
-                    
-                </header>
+        <!-- Pantalla 2: permanece oculta hasta pulsar Cafés. -->
+        <section class="menu_coffe" aria-label="Catálogo de cafés" hidden>
+            <div class="cuadro">
+                <img src="cafe_web.png" alt="Taza de café" class="imagen">
+                <div class="letras">
+                    <p class="perte">Café con leche</p>
+                    <h2 class="tipo">Capuchino</h2>
+                    <p>Espresso y leche vaporizada, con una suave capa de espuma.</p>
+                </div>
             </div>
-
+            <button class="volver" type="button">Volver al menú</button>
         </section>
     </main>
 </body>
+</html>
