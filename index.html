@@ -28,9 +28,9 @@
             </div>
         </section>
 
-        <!-- Pantalla 2: el contenedor se desplaza sin cambiar el diseño ni el tamaño de .cuadro. -->
+        <!-- Pantalla 2: carrusel circular con tarjetas vecinas visibles. -->
         <section class="menu_coffe" aria-label="Catálogo de cafés" hidden>
-            <div class="carrusel-cafes" tabindex="0" aria-label="Productos de café; desliza horizontalmente o utiliza las flechas">
+            <div class="carrusel-cafes" tabindex="0" aria-roledescription="carrusel" aria-label="Productos de café; desliza horizontalmente o utiliza las flechas">
                 <div class="pista-cafes">
                     <article class="cuadro" aria-label="Producto 1 de 3: Capuchino">
                         <img src="cafe_web.png" alt="Taza de café" class="imagen" draggable="false">
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="controles-cafes" aria-label="Controles del carrusel">
-                <button class="cafe-anterior" type="button" aria-label="Producto anterior" disabled>←</button>
+                <button class="cafe-anterior" type="button" aria-label="Producto anterior">←</button>
                 <output class="cafe-indicador" aria-live="polite">01 / 03</output>
                 <button class="cafe-siguiente" type="button" aria-label="Producto siguiente">→</button>
             </div>
