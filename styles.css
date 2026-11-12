@@ -1,60 +1,45 @@
-/* ============================================================
-   1. VARIABLES GLOBALES
-   Colores reutilizados mediante var(--nombre).
-   ============================================================ */
+/* 1. Paleta de colores: cada pantalla puede tener su propio ambiente. */
 :root {
-    --color-primary:#ffe0ac;
-    --color-secondary:#ffffd1;
-    --color-tertiary:#144141;
-    --color-quaternary:#dd1111;
-    --color-sex:#34231C
+    --color-primary: #ffe0ac;
+    --color-secondary: #ffffd1;
+    --color-tertiary: #144141;
+    --color-quaternary: #dd1111;
+    --color-cafe-fondo: #34231c;
+    --color-cafe-tarjeta: #493228;
+    --color-cafe-texto: #f3dfc4;
 }
 
-/* ============================================================
-   2. ESTILOS GENERALES
-   Se aplican a la página o a etiquetas HTML completas.
-   ============================================================ */
+/* 2. Estado de visibilidad: tiene prioridad sobre display:flex de cada sección. */
+[hidden] {
+    display: none !important;
+}
 
-/* Fondo y margen exterior de toda la página. */
 body {
-    background-color: var(--color-sex);
+    background-color: var(--color-primary); /* Fondo claro de la pantalla inicial. */
     margin: 0;
-
-    /* El cuerpo ocupa como mínimo toda la altura visible.
-       Flexbox reparte verticalmente header y main. */
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
+    transition: background-color 180ms ease;
 }
 
-/* Estilo compartido por todos los elementos h1. */
+body[data-vista="cafes"] {
+    background-color: var(--color-cafe-fondo); /* Solo en el catálogo. */
+}
+
 h1 {
-    font-size: 80%;
-    color: var(--color-primary);
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--color-tertiary);
 }
 
-/* ============================================================
-   3. ENCABEZADO
-   .cuadrogrande es el bloque visual dentro de <header>.
-   ============================================================ */
+/* 3. Encabezado de la pantalla inicial. */
 .cuadrogrande {
-    /* Espacio interior y exterior del encabezado. */
     padding: 20px;
-    margin: 0px;
-
-    /* Color de fondo del encabezado. */
-    background-color:var(--color-secondary)
+    background-color: var(--color-secondary);
 }
 
-/* ============================================================
-   4. CONTENIDO PRINCIPAL Y RECUADRO CON SOMBRA
-   Dos niveles de distribución:
-   body reparte header/main; main centra la sección;
-   .sombreado organiza la frase y los cuadros.
-   ============================================================ */
-
-/* Ocupa el espacio bajo el encabezado y centra su contenido.
-   No modifica la animación ni el tamaño propio de los cuadros. */
+/* 4. Estructura común: main distribuye su único hijo visible. */
 main {
     flex: 1;
     display: flex;
@@ -65,169 +50,151 @@ main {
     box-sizing: border-box;
 }
 
-/* La sección debe ocupar todo el ancho para que .trans
-   pueda centrar un recuadro adaptable. */
 main > section {
     width: 100%;
     min-width: 0;
 }
 
-/* .sombreado tiene un ancho estable: en escritorio llega
-   como máximo a 420px; en móvil deja 16px por cada lado.
-   La animación de .sentence ya no cambia el ancho del recuadro. */
+/* 5. Menú inicial: estilos exclusivos del recuadro claro. */
+.trans {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .sombreado {
     text-align: center;
     width: min(420px, calc(100% - 32px));
     box-sizing: border-box;
     margin: 0 auto;
-
-    /* Se elimina translateY(30%): se centrará desde main,
-       de forma adaptable a distintas alturas de pantalla. */
     color: var(--color-tertiary);
     border-radius: 10px;
     box-shadow: 5px 5px 8px var(--color-tertiary);
-
-    /* Los cuatro hijos se apilan y el espacio entre ellos
-       lo controla gap, no los saltos de línea del HTML. */
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 20px;
 }
 
-/* ============================================================
-   5. TEXTO ANIMADO Y CONTENEDOR EXTERIOR
-   ============================================================ */
-
-/* .sentence: solo se anima el ancho del título, no el recuadro.
-   Su padre ya tiene ancho fijo/adaptable, así los cuadros no saltan. */
 .sentence {
     overflow: hidden;
     white-space: nowrap;
-
-    /* Mantiene el aspecto del título y anula el margen por defecto
-       del elemento h2 para que gap controle los espacios. */
     margin: 0;
     padding: 20px;
     font-size: 27px;
     color: var(--color-tertiary);
-
-    /* Conservamos el efecto de escritura original. */
     width: 0;
-    animation: escribir 2.5s steps(16, end) forwards;
+    max-width: 100%;
+    box-sizing: border-box;
+    animation: escribir 2.5s steps(18, end) forwards;
 }
 
-/* .trans: abarca la sección y centra a su hijo .sombreado. */
-.trans {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5px;
-}
-
-/* ============================================================
-   6. CUADROS DE OPCIONES
-   .uno, .dos y .tres comparten exactamente las mismas reglas.
-   ============================================================ */
 .uno, .dos, .tres {
-    /* El 100% toma como referencia el ancho disponible del padre;
-       max-width limita el ancho de cada opción. */
     width: 100%;
     max-width: 362px;
     box-sizing: border-box;
-
-    /* Espacio interior. */
-    padding: 30px ;
-
-    /* Esquinas redondeadas y fondo. */
-    border-radius: 10px;
-    background-color:var(--color-secondary);
+    padding: 30px;
     border: none;
+    border-radius: 10px;
+    background-color: var(--color-secondary);
+    color: var(--color-tertiary);
+    font: inherit;
+    cursor: pointer;
 }
 
-/* ============================================================
-   B. Menus
-   aqui se encuentran los menus 
-   ============================================================ */
-
-
-  .menu_coffe{
-      
-      display: flex;
-      justify-content: center;
-      
-   }
-
-
-   .cuadro{
-      border-bottom: 2px solid #020101;
-      
-      border-radius: 10px;
-      
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-      justify-content: center;
-      margin: 1px;
-
-     width: 100%;
-     max-width: 300px ;
-
-     background-color: #34231C;
-
-   }
-.imagen{
-   width: 100%;
-   max-width: 300px;
-   height: auto;
+.uno:hover, .dos:hover, .tres:hover {
+    filter: brightness(0.97);
 }
-.letras{
-   color: #F3DFC4;
+
+/* 6. Catálogo de cafés: Flexbox y estilos propios, sin afectar al inicio. */
+.menu_coffe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
-   
-   
-   
 
-   
-   
+.cuadro {
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #856452;
+    border-radius: 12px;
+    background-color: var(--color-cafe-tarjeta);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
 
+.imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
+.letras {
+    padding: 16px;
+    color: var(--color-cafe-texto);
+    line-height: 1.5;
+}
 
+.letras p {
+    margin: 0 0 8px;
+}
 
+.letras p:last-child {
+    margin-bottom: 0;
+}
 
+.perte {
+    font-size: 0.9rem;
+}
 
+.tipo {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+}
 
+.volver {
+    padding: 12px 18px;
+    border: 1px solid var(--color-cafe-texto);
+    border-radius: 9px;
+    background-color: transparent;
+    color: var(--color-cafe-texto);
+    font: inherit;
+    cursor: pointer;
+}
 
+.volver:hover {
+    background-color: rgba(243, 223, 196, 0.12);
+}
 
-/* ============================================================
-   7. ANIMACIÓN DE ESCRITURA
-   Modifica el ancho de .sentence, no anima directamente los cuadros.
-   ============================================================ */
+button:focus-visible {
+    outline: 3px solid #dfad4c;
+    outline-offset: 3px;
+}
+
+/* 7. Animación de escritura de la pantalla inicial. */
 @keyframes escribir {
     from { width: 0; }
-    to { width: 16ch; }
+    to { width: 18ch; }
 }
 
-/* ============================================================
-   8. AJUSTES PARA PANTALLAS PEQUEÑAS
-   El tamaño de la tarjeta ya se adapta con min() en .sombreado;
-   aquí se adapta el tamaño de letra sin afectar escritorio.
-   ============================================================ */
+/* 8. Pantallas pequeñas. */
 @media (max-width: 480px) {
     .sentence {
         font-size: clamp(12px, 5vw, 27px);
     }
-    .uno, .dos, .tres{
+
+    .uno, .dos, .tres {
         font-size: clamp(12px, 5vw, 27px);
     }
 }
-
-
-
-
